@@ -1,9 +1,10 @@
 package entitlements
 
 import (
+	"fmt"
+
 	"github.com/pkg/errors"
 	libseccomp "github.com/seccomp/libseccomp-golang"
-	seccomp "github.com/seccomp/libseccomp-golang"
 )
 
 // DenyEntitlements will disallow the capabilities described by the entitlements
@@ -18,15 +19,21 @@ func AllowEntitlements(entitlements []Entitlement) error {
 	return applyEntitlements(entitlements, libseccomp.ActErrno, libseccomp.ActAllow)
 }
 
+func LogEntitlements(entitlements []Entitlement) error {
+	return applyEntitlements(entitlements, libseccomp.ActErrno, libseccomp.ActLog)
+}
+
 // applyEntitlements can be used to allow or deny a set of entitlements
 func applyEntitlements(entitlements []Entitlement, defaultAction, entitlementAction libseccomp.ScmpAction) error {
+
+	fmt.Println("wut")
 
 	filter, err := libseccomp.NewFilter(defaultAction)
 	if err != nil {
 		return err
 	}
 
-	arch, err := seccomp.GetNativeArch()
+	arch, err := libseccomp.GetNativeArch()
 	if err != nil {
 		return errors.Wrap(err, "could not detect architecture for seccomp filter")
 	}
@@ -39,7 +46,7 @@ func applyEntitlements(entitlements []Entitlement, defaultAction, entitlementAct
 	for _, e := range entitlements {
 		for _, s := range e.Syscalls {
 
-			syscall, err := seccomp.GetSyscallFromNameByArch(s, arch)
+			syscall, err := libseccomp.GetSyscallFromNameByArch(s, arch)
 			if err != nil {
 				return errors.Wrap(err, "could not detect syscall name")
 			}
@@ -54,7 +61,6 @@ func applyEntitlements(entitlements []Entitlement, defaultAction, entitlementAct
 	if !filter.IsValid() {
 		return errors.New("invalid seccomp filter")
 	}
-
 	err = filter.Load()
 	if err != nil {
 		return errors.Wrap(err, "could not load seccomp filter into kernel")

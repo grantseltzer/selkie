@@ -1,6 +1,6 @@
 # Selkie
 
-Use selkie to enforce seccomp rules in your code. Select the entitlements that your application needs and not the ones it doesn't need!
+Use Selkie to enforce seccomp rules in your code. Select the entitlements that your application needs and not the ones it doesn't need!
 
 ## How it works
 
