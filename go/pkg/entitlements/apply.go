@@ -17,8 +17,8 @@ func AllowEntitlements(entitlements []Entitlement) error {
 	return applyEntitlements(entitlements, libseccomp.ActErrno, libseccomp.ActAllow)
 }
 
-func LogAllSyscalls(entitlements []Entitlement) error {
-	return applyEntitlements(entitlements, libseccomp.ActLog, libseccomp.ActLog)
+func LogAllSyscalls() error {
+	return applyEntitlements(nil, libseccomp.ActLog, libseccomp.ActAllow)
 }
 
 // applyEntitlements can be used to allow or deny a set of entitlements
