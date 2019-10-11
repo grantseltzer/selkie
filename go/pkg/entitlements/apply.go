@@ -1,8 +1,6 @@
 package entitlements
 
 import (
-	"fmt"
-
 	"github.com/pkg/errors"
 	libseccomp "github.com/seccomp/libseccomp-golang"
 )
@@ -19,14 +17,12 @@ func AllowEntitlements(entitlements []Entitlement) error {
 	return applyEntitlements(entitlements, libseccomp.ActErrno, libseccomp.ActAllow)
 }
 
-func LogEntitlements(entitlements []Entitlement) error {
-	return applyEntitlements(entitlements, libseccomp.ActErrno, libseccomp.ActLog)
+func LogAllSyscalls(entitlements []Entitlement) error {
+	return applyEntitlements(entitlements, libseccomp.ActLog, libseccomp.ActLog)
 }
 
 // applyEntitlements can be used to allow or deny a set of entitlements
 func applyEntitlements(entitlements []Entitlement, defaultAction, entitlementAction libseccomp.ScmpAction) error {
-
-	fmt.Println("wut")
 
 	filter, err := libseccomp.NewFilter(defaultAction)
 	if err != nil {
