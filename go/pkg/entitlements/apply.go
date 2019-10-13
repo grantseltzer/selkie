@@ -1,8 +1,6 @@
 package entitlements
 
 import (
-	"log"
-
 	"github.com/pkg/errors"
 	libseccomp "github.com/seccomp/libseccomp-golang"
 )
@@ -31,11 +29,13 @@ var defaultDeny = map[string]Entitlement{
 func ApplyEntitlements(entitlements []Entitlement) error {
 
 	for _, e := range entitlements {
+		logIfEnabled("allowing entitlement: %s\n", e.Name)
 		delete(defaultDeny, e.Name)
 	}
 
 	deny := []Entitlement{}
 	for _, v := range defaultDeny {
+		logIfEnabled("denying entitlement: %s\n", v.Name)
 		deny = append(deny, v)
 	}
 
@@ -71,6 +71,7 @@ func applyEntitlements(entitlements []Entitlement, defaultAction, entitlementAct
 				return errors.Wrap(err, "could not detect syscall name")
 			}
 
+			logIfEnabled("\tapplying policy: %s for: %v\n", entitlementAction, syscall)
 			err = filter.AddRule(syscall, entitlementAction)
 			if err != nil {
 				return errors.Wrap(err, "could not apply syscall rule")
@@ -81,7 +82,8 @@ func applyEntitlements(entitlements []Entitlement, defaultAction, entitlementAct
 	if !filter.IsValid() {
 		return errors.New("invalid seccomp filter")
 	}
-	log.Println("loading!")
+
+	logIfEnabled("loading seccomp filter into kernel")
 	alreadyInstalledFilter = true
 	err = filter.Load()
 	if err != nil {
