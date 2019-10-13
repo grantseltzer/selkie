@@ -1,6 +1,8 @@
 package entitlements
 
 import (
+	"log"
+
 	"github.com/pkg/errors"
 	libseccomp "github.com/seccomp/libseccomp-golang"
 )
@@ -79,7 +81,7 @@ func applyEntitlements(entitlements []Entitlement, defaultAction, entitlementAct
 	if !filter.IsValid() {
 		return errors.New("invalid seccomp filter")
 	}
-
+	log.Println("loading!")
 	alreadyInstalledFilter = true
 	err = filter.Load()
 	if err != nil {
