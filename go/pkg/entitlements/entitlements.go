@@ -10,7 +10,6 @@ type Entitlement struct {
 var SpecialFiles = Entitlement{
 	Name: "special_files",
 	Syscalls: []string{
-		"mkfifo",
 		"mknod",
 	},
 }

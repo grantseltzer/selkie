@@ -5,7 +5,7 @@ import (
 	libseccomp "github.com/seccomp/libseccomp-golang"
 )
 
-// DOCUMENT
+// DOCUMENT:
 // The idea is to default allow everything
 // and then deny groups of 'non-standard' (i.e shit like mmap, futex)
 // syscalls unless otherwise instructed.
