@@ -32,7 +32,6 @@ var Chown = Entitlement{
 var Admin = Entitlement{
 	Name: "admin",
 	Syscalls: []string{
-		"bpf",
 		"clone",
 		"lookup_dcookie",
 		"mount",
@@ -76,58 +75,92 @@ var Sockets = Entitlement{
 	},
 }
 
-//TODO: break up dangerous into more specific entitlements
-var Dangerous = Entitlement{
-	Name: "dangerous",
+var Mount = Entitlement{
+	Name: "mount",
 	Syscalls: []string{
-		"acct",
-		"add_key",
+		"mount",
+		"umount",
+		"umount2",
+	},
+}
+
+var SetTime = Entitlement{
+	Name: "set_time",
+	Syscalls: []string{
+		"ntp_adjtime",
 		"adjtimex",
-		"bpf",
 		"clock_adjtime",
 		"clock_settime",
-		"clone",
+		"settimeofday",
+		"stime",
+	},
+}
+
+var Tracing = Entitlement{
+	Name: "tracing",
+	Syscalls: []string{
+		"acct",
+		"ptrace",
+		"bpf",
+		"perf_event_open",
+	},
+}
+
+var KernelKeyring = Entitlement{
+	Name: "kernel_keyring",
+	Syscalls: []string{
+		"add_key",
+		"request_key",
+		"keyctl",
+	},
+}
+
+var Modules = Entitlement{
+	Name: "modules",
+	Syscalls: []string{
 		"create_module",
 		"delete_module",
 		"finit_module",
 		"get_kernel_syms",
-		"get_mempolicy",
 		"init_module",
-		"ioperm",
-		"iopl",
-		"kcmp",
+		"query_module",
+	},
+}
+
+var LoadNewKernel = Entitlement{
+	Name: "load__new_kernel",
+	Syscalls: []string{
 		"kexec_file_load",
 		"kexec_load",
-		"keyctl",
+	},
+}
+
+//TODO: break up dangerous into more specific entitlements
+var Dangerous = Entitlement{
+	Name: "dangerous",
+	Syscalls: []string{
+		"clone",
+		"get_mempolicy",
+		"ioperm",
+		"iopl",
 		"lookup_dcookie",
 		"mbind",
-		"mount",
 		"move_pages",
 		"name_to_handle_at",
 		"nfsservctl",
 		"open_by_handle_at",
-		"perf_event_open",
 		"personality",
 		"pivot_root",
 		"process_vm_readv",
 		"process_vm_writev",
-		"ptrace",
-		"query_module",
 		"quotactl",
 		"reboot",
-		"request_key",
 		"set_mempolicy",
 		"setns",
-		"settimeofday",
-		"socket",
-		"socketcall",
-		"stime",
 		"swapon",
 		"swapoff",
 		"sysfs",
 		"_sysctl",
-		"umount",
-		"umount2",
 		"unshare",
 		"uselib",
 		"userfaultfd",

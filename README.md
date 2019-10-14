@@ -9,3 +9,11 @@ Use Selkie to enforce seccomp rules in your code. Select the entitlements that y
 Despite the power that seccomp provides, it's very difficult to use in practice. You must have deep knowledge of all system calls, and even then the task is daunting. This is where Selkie comes in.
 
 <i>Selkie</i> uses entitlements to abstract away the need to know all the system calls your application will need. Getting started is as simple as familiarizing yourself with the entitlements Selkie offers.
+
+## Entitlements
+
+TODO:
+
+## Dependencies
+
+## Quick Start
