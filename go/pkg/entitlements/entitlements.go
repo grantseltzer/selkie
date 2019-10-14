@@ -101,8 +101,11 @@ var Tracing = Entitlement{
 	Syscalls: []string{
 		"acct",
 		"ptrace",
+		"lookup_dcookie",
 		"bpf",
 		"perf_event_open",
+		"process_vm_readv",
+		"process_vm_writev",
 	},
 }
 
@@ -135,37 +138,72 @@ var LoadNewKernel = Entitlement{
 	},
 }
 
-//TODO: break up dangerous into more specific entitlements
-var Dangerous = Entitlement{
-	Name: "dangerous",
+var KernelMemory = Entitlement{
+	Name: "kernel_memory",
 	Syscalls: []string{
-		"clone",
 		"get_mempolicy",
+		"set_mempolicy",
+		"move_pages",
+		"mbind",
+	},
+}
+
+var KernelIO = Entitlement{
+	Name: "kernel_io",
+	Syscalls: []string{
 		"ioperm",
 		"iopl",
-		"lookup_dcookie",
-		"mbind",
-		"move_pages",
-		"name_to_handle_at",
-		"nfsservctl",
-		"open_by_handle_at",
-		"personality",
+	},
+}
+
+var RootFS = Entitlement{
+	Name: "rootfs",
+	Syscalls: []string{
 		"pivot_root",
-		"process_vm_readv",
-		"process_vm_writev",
-		"quotactl",
-		"reboot",
-		"set_mempolicy",
+	},
+}
+
+var Namespaces = Entitlement{
+	Name: "namespaces",
+	Syscalls: []string{
+		"clone",
+		"unshare",
 		"setns",
+	},
+}
+
+var SwapMemory = Entitlement{
+	Name: "swap_memory",
+	Syscalls: []string{
 		"swapon",
 		"swapoff",
+	},
+}
+
+var Reboot = Entitlement{
+	Name: "reboot",
+	Syscalls: []string{
+		"reboot",
+	},
+}
+
+var ResourceQuota = Entitlement{
+	Name: "resource_quota",
+	Syscalls: []string{
+		"quotactl",
+	},
+}
+
+var obsolete = Entitlement{
+	Name: "obsolete",
+	Syscalls: []string{
 		"sysfs",
 		"_sysctl",
-		"unshare",
-		"uselib",
-		"userfaultfd",
+		"personality",
 		"ustat",
+		"nfsservctl",
 		"vm86",
+		"uselib",
 		"vm86old",
 	},
 }
