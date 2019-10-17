@@ -60,7 +60,9 @@ var Exec = Entitlement{
 	},
 }
 
-var Sockets = Entitlement{
+// NetworkConnection describes the system calls needed for using any network functionality
+// This includes creating and using sockets, and sending/receving messages over them
+var NetworkConnection = Entitlement{
 	Name: "sockets",
 	Syscalls: []string{
 		"socket",
@@ -72,9 +74,11 @@ var Sockets = Entitlement{
 		"socketcall",
 		"bind",
 		"listen",
+		//TODO: Probably need ones for sending/receiving messages
 	},
 }
 
+// Mount describes the system calls for mounting and unmounting file systems
 var Mount = Entitlement{
 	Name: "mount",
 	Syscalls: []string{
@@ -84,6 +88,7 @@ var Mount = Entitlement{
 	},
 }
 
+// SetTime describes the system calls for dealing with the systems clock
 var SetTime = Entitlement{
 	Name: "set_time",
 	Syscalls: []string{
@@ -96,6 +101,8 @@ var SetTime = Entitlement{
 	},
 }
 
+// Tracing describes the system calls for dealing with the tracing
+// facilities of the kernel - this includes ptrace and bpf
 var Tracing = Entitlement{
 	Name: "tracing",
 	Syscalls: []string{
@@ -109,6 +116,8 @@ var Tracing = Entitlement{
 	},
 }
 
+// KernelKeyring includes the system calls needed for interacting
+// with the kernel management facility
 var KernelKeyring = Entitlement{
 	Name: "kernel_keyring",
 	Syscalls: []string{
@@ -118,6 +127,8 @@ var KernelKeyring = Entitlement{
 	},
 }
 
+// Modules includes the system cals for creating, deleting,
+// and interacting with kernel modules
 var Modules = Entitlement{
 	Name: "modules",
 	Syscalls: []string{
@@ -130,6 +141,8 @@ var Modules = Entitlement{
 	},
 }
 
+// LoadNewKernel includes the system calls used for loading
+// a new kernel into memory
 var LoadNewKernel = Entitlement{
 	Name: "load__new_kernel",
 	Syscalls: []string{
@@ -138,6 +151,8 @@ var LoadNewKernel = Entitlement{
 	},
 }
 
+// KernelMemory describes system calls that modify kernel memory
+// and NUMA settings
 var KernelMemory = Entitlement{
 	Name: "kernel_memory",
 	Syscalls: []string{
@@ -148,6 +163,7 @@ var KernelMemory = Entitlement{
 	},
 }
 
+// KernelIO includes system calls that modify kernel I/O privleges
 var KernelIO = Entitlement{
 	Name: "kernel_io",
 	Syscalls: []string{
@@ -156,6 +172,7 @@ var KernelIO = Entitlement{
 	},
 }
 
+// RootFS describes the system call for modifying the root filesystem
 var RootFS = Entitlement{
 	Name: "rootfs",
 	Syscalls: []string{
@@ -163,15 +180,17 @@ var RootFS = Entitlement{
 	},
 }
 
+// Namespaces describes the system calls for changing the namespaces
+// of a process
 var Namespaces = Entitlement{
 	Name: "namespaces",
 	Syscalls: []string{
-		"clone",
 		"unshare",
 		"setns",
 	},
 }
 
+// SwapMemory describes system calls for
 var SwapMemory = Entitlement{
 	Name: "swap_memory",
 	Syscalls: []string{
@@ -180,6 +199,8 @@ var SwapMemory = Entitlement{
 	},
 }
 
+// Reboot contains the system call for allowing a program
+// to restart the system
 var Reboot = Entitlement{
 	Name: "reboot",
 	Syscalls: []string{
@@ -187,6 +208,8 @@ var Reboot = Entitlement{
 	},
 }
 
+// ResourceQuota contains the system call for interacting with the
+// per-user, per-group, and per-project disk quota
 var ResourceQuota = Entitlement{
 	Name: "resource_quota",
 	Syscalls: []string{
@@ -194,6 +217,8 @@ var ResourceQuota = Entitlement{
 	},
 }
 
+// obsolete contains the system calls that are not used and probably
+// have no business being allowed
 var obsolete = Entitlement{
 	Name: "obsolete",
 	Syscalls: []string{
