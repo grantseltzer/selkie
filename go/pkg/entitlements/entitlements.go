@@ -15,7 +15,6 @@ var SpecialFiles = Entitlement{
 }
 
 // Chown describes the ability to change ownership of files
-// see http://man7.org/linux/man-pages/man2/chown32.2.html
 var Chown = Entitlement{
 	Name: "chown",
 	Syscalls: []string{
@@ -48,7 +47,6 @@ var Admin = Entitlement{
 }
 
 // Exec includes the exec, fork, and clone syscalls.
-// Consider using 'Proc' instead.
 var Exec = Entitlement{
 	Name: "exec",
 	Syscalls: []string{
@@ -56,7 +54,6 @@ var Exec = Entitlement{
 		"execveat",
 		"fork",
 		"vfork",
-		"clone",
 	},
 }
 

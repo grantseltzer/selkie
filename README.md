@@ -12,8 +12,12 @@ Despite the power that seccomp provides, it's very difficult to use in practice.
 
 ## Entitlements
 
-TODO:
+See godoc [here]()
 
 ## Dependencies
 
+- libseccomp-dev [[debian-like](https://launchpad.net/ubuntu/+source/libseccomp) / [centos-like](https://rpmfind.net/linux/rpm2html/search.php?query=libseccomp-devel)]
+
 ## Quick Start
+
+WIP
