@@ -1,6 +1,13 @@
 # Selkie
 
-Use Selkie to enforce seccomp rules in your code. Select the entitlements that your application needs and not the ones it doesn't need!
+<p align="center">
+    <b>Use Selkie to enforce seccomp rules in your code. Select the entitlements that your application needs and not the ones it doesn't need!</b>
+</p>
+
+<p align="center">
+    <img src="lurker.jpg" alt="drawing" width="600"/>
+</p>
+
 
 ## How it works
 
@@ -16,7 +23,7 @@ See godoc [here]()
 
 ## Dependencies
 
-- libseccomp-dev [[debian-like](https://launchpad.net/ubuntu/+source/libseccomp) / [centos-like](https://rpmfind.net/linux/rpm2html/search.php?query=libseccomp-devel)]
+- libseccomp-dev [debian-like](https://launchpad.net/ubuntu/+source/libseccomp) / [centos-like](https://rpmfind.net/linux/rpm2html/search.php?query=libseccomp-devel)
 
 ## Quick Start
 
