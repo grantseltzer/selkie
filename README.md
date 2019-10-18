@@ -16,7 +16,7 @@ Selkie's entitlements aren't quite allow or deny lists. The installed seccomp fi
 
 ## Entitlements
 
-See godoc [here]()
+See godoc [here](https://godoc.org/github.com/grantseltzer/selkie/go/pkg/entitlements)
 
 ## Dependencies
 
