@@ -5,23 +5,27 @@ import (
 	libseccomp "github.com/seccomp/libseccomp-golang"
 )
 
-// DOCUMENT:
-// The idea is to default allow everything
-// and then deny groups of 'non-standard' (i.e shit like mmap, futex)
-// syscalls unless otherwise instructed.
-// We don't want to break things, the added security
-// of denying what will by default be denied is enough
-// where it's worth it. Otherwise people won't use
-// this library. Make sense?
-
 var alreadyInstalledFilter = false
 
 var defaultDeny = map[string]Entitlement{
-	Chown.Name:        Chown,
-	SpecialFiles.Name: SpecialFiles,
-	Admin.Name:        Admin,
-	Exec.Name:         Exec,
-	Sockets.Name:      Sockets,
+	SpecialFiles.Name:      SpecialFiles,
+	Chown.Name:             Chown,
+	Exec.Name:              Exec,
+	NetworkConnection.Name: NetworkConnection,
+	Mount.Name:             Mount,
+	SetTime.Name:           SetTime,
+	Tracing.Name:           Tracing,
+	KernelKeyring.Name:     KernelKeyring,
+	Modules.Name:           Modules,
+	LoadNewKernel.Name:     LoadNewKernel,
+	KernelMemory.Name:      KernelMemory,
+	KernelIO.Name:          KernelIO,
+	RootFS.Name:            RootFS,
+	Namespaces.Name:        Namespaces,
+	SwapMemory.Name:        SwapMemory,
+	Reboot.Name:            Reboot,
+	ResourceQuota.Name:     ResourceQuota,
+	obsolete.Name:          obsolete,
 }
 
 // ApplyEntitlements will allow the syscalls described by the entitlements

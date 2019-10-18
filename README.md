@@ -77,3 +77,5 @@ func HelloServer(w http.ResponseWriter, r *http.Request) {
     fmt.Fprintf(w, "I can modprobe if you exploit me, %s!", r.URL.Path[1:])
 }
 ```
+
+From here you wouldn't notice any difference in your applications runtime, except now it has a lot less system calls that it can use!

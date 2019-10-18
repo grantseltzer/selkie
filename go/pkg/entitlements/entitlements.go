@@ -25,27 +25,6 @@ var Chown = Entitlement{
 	},
 }
 
-// Admin describes the system calls cap_sys_admin will grant you
-// access to. Use with caution.
-// see http://man7.org/linux/man-pages/man7/capabilities.7.html
-var Admin = Entitlement{
-	Name: "admin",
-	Syscalls: []string{
-		"clone",
-		"lookup_dcookie",
-		"mount",
-		"quotactl",
-		"setns",
-		"swapon",
-		"swapoff",
-		"umount",
-		"umount2",
-		"unshare",
-		"vm86",
-		"vm86old",
-	},
-}
-
 // Exec includes the exec, fork, and clone syscalls.
 var Exec = Entitlement{
 	Name: "exec",
