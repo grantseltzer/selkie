@@ -19,7 +19,7 @@ Despite the power that seccomp provides, it's very difficult to use in practice.
 
 ## Entitlements
 
-See godoc [here]()
+See godoc [here](https://godoc.org/github.com/grantseltzer/selkie/go/pkg/entitlements)
 
 ## Dependencies
 
