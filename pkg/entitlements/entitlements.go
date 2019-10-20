@@ -39,7 +39,7 @@ var Exec = Entitlement{
 // NetworkConnection describes the system calls needed for using any network functionality
 // This includes creating and using sockets, and sending/receving messages over them
 var NetworkConnection = Entitlement{
-	Name: "sockets",
+	Name: "network_connection",
 	Syscalls: []string{
 		"socket",
 		"getsockopt",
@@ -120,7 +120,7 @@ var Modules = Entitlement{
 // LoadNewKernel includes the system calls used for loading
 // a new kernel into memory
 var LoadNewKernel = Entitlement{
-	Name: "load__new_kernel",
+	Name: "load_new_kernel",
 	Syscalls: []string{
 		"kexec_file_load",
 		"kexec_load",

@@ -26,7 +26,10 @@ func main() {
 				return nil
 			}
 
-			entitlements := libentitlements.GetEntitlementsFromNames(args)
+			entitlements, err := libentitlements.GetEntitlementsFromNames(args)
+			if err != nil {
+				return err
+			}
 			spec := libentitlements.CreateOCIProfileFromEntitlements(entitlements)
 
 			jsonSpec, err := json.MarshalIndent(spec, "", " ")

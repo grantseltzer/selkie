@@ -1,6 +1,10 @@
 package entitlements
 
-import spec "github.com/opencontainers/runtime-spec/specs-go"
+import (
+	"fmt"
+
+	spec "github.com/opencontainers/runtime-spec/specs-go"
+)
 
 // CreateProfileFromEntitlements allows you to pass a set of entitlements and to
 // create an OCI compliant seccomp profile. That profile can be marshalled to JSON
@@ -32,6 +36,22 @@ func CreateOCIProfileFromEntitlements(entitlements []Entitlement) spec.LinuxSecc
 	return spec
 }
 
-func GetEntitlementsFromNames(entitlementNames []string) []Entitlement {
-	return nil
+func GetEntitlementsFromNames(entitlementNames []string) ([]Entitlement, error) {
+	entitlements := []Entitlement{}
+	var err error
+
+	for _, name := range entitlementNames {
+		entitlement := defaultDeny[name]
+		if entitlement != nil {
+			entitlements = append(entitlements, *entitlement)
+		} else {
+			err = fmt.Errorf("%s, %s", err.Error(), name)
+		}
+	}
+
+	if err != nil {
+		return nil, fmt.Errorf("Invalid entitlements specified: %s", err.Error())
+	}
+
+	return entitlements, nil
 }
