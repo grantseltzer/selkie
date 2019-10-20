@@ -10,14 +10,25 @@ import (
 )
 
 func main() {
+	var list bool
 
 	var karnCommand = &cobra.Command{
 		Use:   "karn ['--' FLAGS] [Entitlements]",
 		Short: "A simple generator of OCI-compliant seccomp profiles based on entitlements",
 		Args:  verifyEntitlementArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
+
+			if list {
+				listOfEntitlements := libentitlements.ListEntitlements()
+				for i := range listOfEntitlements {
+					fmt.Println(listOfEntitlements[i])
+				}
+				return nil
+			}
+
 			entitlements := libentitlements.GetEntitlementsFromNames(args)
 			spec := libentitlements.CreateOCIProfileFromEntitlements(entitlements)
+
 			jsonSpec, err := json.MarshalIndent(spec, "", " ")
 			if err != nil {
 				return errors.New("error preparing JSON seccomp profile")
@@ -27,6 +38,10 @@ func main() {
 			return nil
 		},
 	}
+
+	k := karnCommand.PersistentFlags()
+
+	k.BoolVarP(&list, "list", "l", false, "list available entitlements")
 
 	err := karnCommand.Execute()
 	if err != nil {

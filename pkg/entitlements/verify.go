@@ -23,6 +23,15 @@ var defaultDeny = map[string]*Entitlement{
 	obsolete.Name:          &obsolete,
 }
 
+// ListEntitlements returns the list of default entitlements
+func ListEntitlements() []string {
+	list := []string{}
+	for k, _ := range defaultDeny {
+		list = append(list, k)
+	}
+	return list
+}
+
 func ValidEntitlement(entitlementName string) bool {
 	if defaultDeny[entitlementName] == nil {
 		return false
